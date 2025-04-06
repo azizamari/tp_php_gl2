@@ -43,7 +43,7 @@ $totalUsers = $userModel->count();
             <div class="card-body">
                 <h5 class="card-title">Users</h5>
                 <p class="card-text">Total: <?= $totalUsers ?></p>
-                <a href="#" class="btn btn-primary">Manage Users</a>
+                <!-- <a href="#" class="btn btn-primary">Manage Users</a> -->
             </div>
         </div>
     </div>
