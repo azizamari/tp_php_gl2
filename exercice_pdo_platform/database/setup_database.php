@@ -54,6 +54,23 @@ try {
         echo "Default admin user created.<br>";
     }
 
+    // Insert default regular user if none exists
+    $stmt = $conn->prepare("SELECT id FROM user WHERE role = 'user' LIMIT 1");
+    $stmt->execute();
+    
+    if ($stmt->rowCount() == 0) {
+        // Create default user: username=user, password=user123
+        $username = 'user';
+        $password = password_hash('user123', PASSWORD_DEFAULT);
+        $email = 'user@example.com';
+        $role = 'user';
+        
+        $stmt = $conn->prepare("INSERT INTO user (username, password, email, role) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$username, $password, $email, $role]);
+        
+        echo "Default regular user created.<br>";
+    }
+
     // Insert some sample sections if none exist
     $stmt = $conn->prepare("SELECT id FROM section LIMIT 1");
     $stmt->execute();
